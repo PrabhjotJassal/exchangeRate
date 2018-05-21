@@ -1,0 +1,88 @@
+<% include partials/header %>
+
+<% if (data) { %>
+    <div class="result center mb-4">
+        <%= data.fromAmount %> <%= data.from %> ( <%= data.fromSymbol %> )
+            = 
+        <%= Math.round(data.toAmount * 100) / 100 %> <%= data.to %> ( <%= data.toSymbol %> )
+    </div>
+<% } %>
+
+<div>
+    <form action="/exchangeRates" method="POST" class="needs-validation" novalidate>
+      <div class="form-group row">
+        <label for="from" class="col-sm-2 col-form-label">From: </label>
+        <div class="col-sm-10">
+            <select id="from" name="from" class="form-control" required>
+              <option value="">Please select</option>
+              
+              <% currencies.forEach(function(currency) { %>
+                <option value="<%= currency.symbol %>"><%= currency.name %></option>        
+              <% }); %>
+            </select>
+            <div class="invalid-feedback">
+              Please choose the currency
+            </div>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label for="to" class="col-sm-2 col-form-label">To: </label>
+        <div class="col-sm-10">
+            <select id="to" name="to" class="form-control" required>
+              <option value="">Please select</option>
+              
+              <% currencies.forEach(function(currency) { %>
+                <option value="<%= currency.symbol %>"><%= currency.name %></option>        
+              <% }); %>
+            </select>
+            <div class="invalid-feedback">
+              Please choose the currency
+            </div>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+          <label for="fromAmount" class="col-sm-2 col-form-label">Amount: </label>
+          <div class="col-sm-10">
+              <input type="number" id="fromAmount" name="amount" class="form-control" min="1" max="9999999" required></input>
+              <div class="invalid-feedback">
+                Please enter amount (any value from 1 to 9999999)
+              </div>
+          </div>
+      </div>
+      
+      <div class="form-group row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+            <input type="submit" class="btn btn-primary btn-block" value="Calculate"></input>
+        </div>
+      </div>
+    </form>
+    
+</div>
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
+
+
+
+<% include partials/footer %>

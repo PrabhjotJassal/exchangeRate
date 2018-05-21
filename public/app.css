@@ -1,0 +1,23 @@
+.form-group {
+    width: 40%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.center {
+    text-align: center;
+}
+
+.footer {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.result {
+    font-weight: 700;
+    font-size: 30px;
+    color: #39ce2a;
+}
+
+
+
